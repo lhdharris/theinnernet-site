@@ -1,6 +1,8 @@
-/* THE INNERNET — the app's own styling, carried over to the site:
-   three colours (paper, stone, ink), Tiny5 LCD for the mark, stone
-   outlines between lights, rounded 8, quiet stone labels, square dots. */
+/* THE INNERNET — the app's own styling, carried over to the site: its
+   theme's colours (Minima's three by default: paper, stone, ink), Tiny5 LCD
+   for the mark, outlines between lights, rounded 8, quiet stone labels.
+   Each of the app's themes is a set of the same variables below (from its
+   CSS file in the app's themes/), chosen by <html data-theme> (theme.js). */
 
 @font-face {
   font-family: 'Tiny5';
@@ -10,15 +12,46 @@
   font-display: swap;
 }
 
-:root {
+:root, [data-theme="minima"] {
   --paper: #F8F7F4;
   --stone: #776F64;
   --ink: #63605B;
   /* stone and paper, mixed, for hairlines and fills that aren't full stone */
   --line: color-mix(in srgb, var(--stone) 45%, var(--paper));
+  --page: var(--paper);          /* what the page is drawn on */
+  --selected: var(--stone);      /* the theme switch's indicator */
+  --on-selected: var(--paper);
+  --accent: var(--ink);          /* filled buttons */
+  --on-accent: var(--paper);
   --wash: color-mix(in srgb, var(--stone) 8%, var(--paper));
   --deep: color-mix(in srgb, var(--stone) 16%, var(--paper));
   --radius: 8px;
+}
+[data-theme="dew"] {
+  --paper: #FCFEFF; --stone: #5F6C78; --ink: #3F4952; --line: #B7C6D4; --page: #F1F8FD;
+  --selected: #B7DCFD; --on-selected: #3F4952; --accent: #95CAF8; --on-accent: #3F4952;
+}
+[data-theme="blush"] {
+  --paper: #FFFDFD; --stone: #79666B; --ink: #514347; --line: #D4BFC5; --page: #FDF4F6;
+  --selected: #FAC8D6; --on-selected: #514347; --accent: #F3ADC2; --on-accent: #514347;
+}
+[data-theme="mint"] {
+  --paper: #FCFEFD; --stone: #607067; --ink: #3F4B44; --line: #B7C9BF; --page: #F1F9F4;
+  --selected: #B6E4CA; --on-selected: #3F4B44; --accent: #93D6B1; --on-accent: #3F4B44;
+}
+[data-theme="lilac"] {
+  --paper: #FEFDFF; --stone: #6E6978; --ink: #494551; --line: #C8C2D4; --page: #F8F5FD;
+  --selected: #DDCFFA; --on-selected: #494551; --accent: #CCB8F4; --on-accent: #494551;
+}
+[data-theme="clara"] {
+  --paper: #FFFFFF; --stone: rgba(54, 54, 54, 0.75); --ink: #363636; --line: rgba(0, 0, 0, 0.3);
+  --page: #F5F5F5; --selected: #3069D0; --on-selected: #FFFFFF; --accent: #3069D0; --on-accent: #FFFFFF;
+}
+
+/* A change of theme glides rather than snaps. */
+body, a, h1, h2, h3, h4, .intro, .wordmark, .tagline, .quiet, footer, footer nav a,
+figure.screen img, .rule, .beta input, .beta button, .theme-switch, .theme-switch button {
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease;
 }
 
 * { box-sizing: border-box; }
@@ -26,7 +59,7 @@
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--page);
   font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   font-size: 16px;
   line-height: 1.6;
@@ -155,10 +188,53 @@ figure.screen figcaption {
 .beta input:focus { outline: none; border-color: var(--ink); }
 .beta button {
   padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer;
-  background: var(--ink); color: var(--paper);
-  border: 1px solid var(--ink); border-radius: var(--radius);
+  background: var(--accent); color: var(--on-accent);
+  border: 1px solid var(--accent); border-radius: var(--radius);
 }
-.beta button:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
+.beta button:hover { background: color-mix(in srgb, var(--accent) 85%, var(--paper)); }
+
+/* The themes: the app's view switch (SlideToggle) as a theme switch, a
+   track outlined like the app's with a sliding indicator; clicking a
+   segment, or dragging across them, redraws the page (and its pictures)
+   in that theme. */
+.themes { text-align: center; padding: 8px 0 8px; }
+.themes h2 { font-size: 26px; margin: 0 0 22px; }
+.theme-switch {
+  display: inline-flex; position: relative; padding: 2px;
+  border: 1px solid var(--line); border-radius: 6px;
+  touch-action: none; user-select: none; -webkit-user-select: none;
+  max-width: 100%;
+}
+.theme-switch .indicator {
+  position: absolute; top: 2px; bottom: 2px; left: 2px;
+  width: calc((100% - 4px) / var(--count)); border-radius: 4px;
+  background: var(--selected);
+  transform: translateX(calc(var(--at) * 100%));
+  transition: transform .2s ease-out, background-color .35s ease;
+}
+.theme-switch button {
+  position: relative; width: 120px; min-width: 0; height: 33px; padding: 0 4px;
+  font: inherit; font-size: 14.4px; font-weight: 600; color: var(--stone);
+  background: none; border: 0; border-radius: 4px; cursor: pointer;
+}
+.theme-switch button:hover:not([aria-checked="true"]) {
+  background: color-mix(in srgb, var(--ink) 8%, transparent);
+}
+.theme-switch button[aria-checked="true"] { color: var(--on-selected); }
+.theme-switch button:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+/* "and more…": the last segment, quieter and never chosen. */
+.theme-switch .more {
+  position: relative; width: 120px; height: 33px; display: flex;
+  align-items: center; justify-content: center; padding: 0 4px;
+  font-size: 14.4px; font-weight: 600; font-style: italic; line-height: 1.1;
+  color: color-mix(in srgb, var(--stone) 60%, var(--page)); cursor: default;
+}
+
+/* Each screenshot shows the app in the page's theme: the next theme's
+   picture fades in over the last. */
+figure.screen .shots { position: relative; }
+figure.screen .shots img + img { position: absolute; inset: 0; }
+figure.screen .shots img { transition: opacity .35s ease, border-color .35s ease; }
 
 /* Rules between sections: stone hairlines, as outlines separate lights */
 .rule { border: 0; border-top: 1px solid var(--line); margin: 56px 0 0; }
@@ -205,4 +281,6 @@ footer nav a:hover { color: var(--ink); }
   .hero.mark { padding: 0; }
   .bubble.you { margin-left: 0; }
   .beta { flex-direction: column; }
+  .theme-switch { display: flex; }
+  .theme-switch button, .theme-switch .more { flex: 1; width: auto; font-size: 12px; }
 }
