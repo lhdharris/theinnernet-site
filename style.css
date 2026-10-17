@@ -1,39 +1,208 @@
-:root { --ink:#1d1a17; --paper:#f6f2ea; --accent:#b4552d; --dim:#6b6257; }
-* { box-sizing:border-box; }
-body { margin:0; color:var(--ink); background:var(--paper); font-family:Georgia, 'Times New Roman', serif; line-height:1.55; }
-a { color:var(--accent); }
-.top, main, footer { max-width:760px; margin:0 auto; padding:0 24px; }
-.top { display:flex; flex-wrap:wrap; gap:12px; align-items:baseline; justify-content:space-between; padding-top:28px; }
-.mark { font-family:'Tiny5', 'Courier New', monospace; font-size:20px; letter-spacing:2px; }
-.top nav { display:flex; gap:14px; flex-wrap:wrap; }
-.top nav a { text-decoration:none; font-size:14px; }
-.hero { padding:56px 0 8px; }
-.soon { display:inline-block; border:1px solid var(--accent); color:var(--accent); border-radius:3px; padding:3px 10px; font-size:12px; letter-spacing:1.5px; text-transform:uppercase; margin:0 0 18px; }
-.hero h1 { font-size:44px; margin:0 0 12px; line-height:1.15; }
-.lede { font-size:19px; max-width:560px; margin-top:0; color:#3a342c; }
-.points { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px 32px; padding:36px 0 8px; }
-.points h3 { margin:0 0 6px; font-size:18px; }
-.points p { margin:0; font-size:16px; color:#4a433a; }
-.pricing { border-top:2px solid var(--ink); margin-top:44px; padding-top:28px; }
-.pricing h2 { margin:0 0 6px; font-size:26px; }
-.sub { margin:0 0 22px; color:#4a433a; max-width:640px; }
-.tiers { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; }
-.tiers.two { max-width:480px; }
-.tier { border:1px solid #cdc2b2; border-radius:6px; padding:18px; background:#fbf8f2; }
-.tier h4 { margin:0 0 8px; font-size:15px; letter-spacing:1px; text-transform:uppercase; }
-.tier.best { border-color:var(--accent); background:#fdf6ef; }
-.price { font-size:30px; margin-bottom:8px; }
-.price span { font-size:14px; color:var(--dim); }
-.tier p { margin:0; font-size:14.5px; color:#4a433a; }
-.tiny { font-size:13px; color:var(--dim); margin-top:18px; }
-.trial { border-top:1px solid #cdc2b2; margin-top:44px; padding-top:24px; }
-.trial h2 { margin:0 0 8px; font-size:22px; }
-.trial p { margin:0; max-width:640px; color:#4a433a; }
-.footnotes { margin-top:40px; padding-top:18px; border-top:1px solid #cdc2b2; font-size:14px; color:#4a433a; }
-footer { border-top:2px solid var(--ink); margin-top:36px; padding:20px 24px 40px; font-size:13px; color:var(--dim); }
-footer p { margin:6px 0; }
-.doc { padding:48px 0 24px; }
-.doc h1 { font-size:34px; margin:0 0 20px; }
-.doc h2 { font-size:21px; margin:28px 0 8px; }
-.doc p, .doc li { max-width:640px; }
-.crumb { font-size:13px; }
+/* THE INNERNET — the app's own styling, carried over to the site:
+   three colours (paper, stone, ink), Tiny5 LCD for the mark, stone
+   outlines between lights, rounded 8, quiet stone labels, square dots. */
+
+@font-face {
+  font-family: 'Tiny5';
+  src: url('fonts/Tiny5-LCDRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --paper: #F8F7F4;
+  --stone: #776F64;
+  --ink: #63605B;
+  /* stone and paper, mixed, for hairlines and fills that aren't full stone */
+  --line: color-mix(in srgb, var(--stone) 45%, var(--paper));
+  --wash: color-mix(in srgb, var(--stone) 8%, var(--paper));
+  --deep: color-mix(in srgb, var(--stone) 16%, var(--paper));
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--ink); text-decoration-color: var(--stone); text-underline-offset: 3px; }
+a:hover { color: var(--stone); }
+
+h1, h2, h3, h4 { font-weight: 600; color: var(--ink); line-height: 1.25; }
+
+main { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+/* The top of the home page: the wordmark centred in the space above the
+   fold, and the next heading with the very top of the screenshot just
+   peeking over the bottom edge (.mark) — a hint of what's below. */
+.hero { padding: 44px 0 24px; }
+.hero.mark {
+  padding: 0;
+  min-height: calc(100vh - 96px);
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+}
+.intro {
+  font-size: 16px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--stone); margin: 0 0 14px;
+}
+.wordmark {
+  font-family: 'Tiny5', monospace;
+  font-size: 72px; letter-spacing: 8px; line-height: 1;
+  color: var(--ink); margin: 0;
+}
+.home-card { text-align: center; }
+.home-card h2 { font-size: 30px; margin: 0 0 26px; }
+/* the caption's gone; the gap it left stays between image and tagline */
+.home-card figure.screen { margin: 0 auto 52px; }
+.tagline {
+  font-size: 19px; color: var(--stone); max-width: 560px; margin: 0 auto;
+}
+.home-card { padding-bottom: 56px; }
+.chip {
+  display: inline-block; border: 1px solid var(--stone); color: var(--stone);
+  border-radius: var(--radius); padding: 4px 12px; font-size: 12px;
+  letter-spacing: 1.6px; text-transform: uppercase; font-weight: 600;
+  margin: 0 0 26px;
+}
+.hero .lede { font-size: 19px; max-width: 600px; margin: 0 auto; color: var(--stone); }
+
+/* Screen figures: stone-outlined, rounded like the app's cards */
+figure.screen { margin: 48px auto; max-width: 720px; }
+figure.screen img {
+  display: block; width: 100%; height: auto;
+  border: 1px solid var(--line); border-radius: var(--radius);
+}
+figure.screen.portrait { text-align: center; }
+figure.screen.portrait img { display: inline-block; max-width: 540px; }
+figure.screen figcaption {
+  font-size: 13px; color: var(--stone); margin: 10px 2px 0;
+}
+
+/* Feature cards */
+.points {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px; padding: 20px 0 8px;
+}
+.points div {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 20px 22px; background: var(--paper);
+}
+.points h3 { margin: 0 0 8px; font-size: 16.5px; }
+.points p { margin: 0; font-size: 15px; color: var(--stone); }
+
+/* A word section beside or before a figure */
+.walk { max-width: 640px; margin: 0; }
+.walk.right { margin-left: auto; text-align: right; }
+.walk.right h2, .walk.right p { max-width: 560px; margin-left: auto; }
+.walk h2 { font-size: 26px; margin: 0 0 10px; }
+.walk h3 { font-size: 18px; margin: 0 0 8px; }
+.walk p { margin: 0 0 12px; color: var(--ink); }
+.quiet { color: var(--stone); }
+
+/* Lists styled like the app's quiet labels */
+.list { padding-left: 0; list-style: none; margin: 14px 0; }
+.list li {
+  padding: 10px 0 10px 0; border-top: 1px solid var(--line);
+  font-size: 15.5px; max-width: 640px;
+}
+.list li:last-child { border-bottom: 1px solid var(--line); }
+.list b { font-weight: 600; }
+
+/* Pricing */
+.pricing { margin-top: 56px; }
+.pricing h2 { font-size: 26px; margin: 0 0 8px; }
+.sub { margin: 0 0 22px; color: var(--stone); max-width: 640px; }
+.tiers { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.tiers.two { max-width: 480px; }
+.tier {
+  border: 1px solid var(--stone); border-radius: var(--radius);
+  padding: 20px 22px;
+}
+.tier h4 {
+  margin: 0 0 10px; font-size: 13px; letter-spacing: 1.4px;
+  text-transform: uppercase; color: var(--stone);
+}
+.tier.filled { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+.tier.filled, .tier.filled h4, .tier.filled .price span { color: var(--paper); }
+.tier.filled h4 { color: color-mix(in srgb, var(--paper) 70%, var(--ink)); }
+.price { font-size: 30px; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
+.price span { font-size: 14px; font-weight: 600; color: var(--stone); }
+.tier p { margin: 0; font-size: 14.5px; color: var(--stone); }
+.tier.filled .price { color: var(--paper); }
+.tier.filled p { color: color-mix(in srgb, var(--paper) 80%, var(--stone)); }
+.tiny { font-size: 13px; color: var(--stone); margin-top: 18px; }
+
+/* Beta request: an email box and a filled send button, as the app's controls */
+.beta-ask { text-align: center; margin: 48px 0 56px; }
+.beta-ask h2 { font-size: 26px; margin: 0 0 22px; }
+.beta { display: flex; gap: 12px; max-width: 520px; margin: 0 auto; }
+.beta input {
+  flex: 1; padding: 10px 14px; font: inherit; color: var(--ink);
+  background: var(--paper); border: 1px solid var(--stone);
+  border-radius: var(--radius);
+}
+.beta input::placeholder { color: var(--stone); }
+.beta input:focus { outline: none; border-color: var(--ink); }
+.beta button {
+  padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer;
+  background: var(--ink); color: var(--paper);
+  border: 1px solid var(--ink); border-radius: var(--radius);
+}
+.beta button:hover { background: color-mix(in srgb, var(--ink) 85%, var(--paper)); }
+
+/* Rules between sections: stone hairlines, as outlines separate lights */
+.rule { border: 0; border-top: 1px solid var(--line); margin: 56px 0 0; }
+
+/* Trial / footnotes / footer */
+.trial { margin-top: 52px; }
+.trial h2 { font-size: 22px; margin: 0 0 8px; }
+.trial p { margin: 0; max-width: 640px; color: var(--ink); }
+.footnotes { margin-top: 44px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 14px; color: var(--stone); }
+.footnotes p { margin: 6px 0; }
+footer {
+  max-width: 880px; margin: 48px auto 0; padding: 22px 24px 44px;
+  border-top: 1px solid var(--stone); font-size: 13px; color: var(--stone);
+}
+footer p { margin: 6px 0; }
+footer nav { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
+footer nav a { color: var(--stone); }
+footer nav a:hover { color: var(--ink); }
+
+/* The AI page's reply echo: the reader's pale-stone bubble, as in the panel. */
+.bubble {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 18px; max-width: 620px; margin: 0 0 12px; font-size: 15.5px;
+  background: var(--paper);
+}
+.bubble.you { background: var(--deep); border-color: var(--deep); margin-left: 15%; }
+.bubble .who {
+  font-size: 12px; letter-spacing: 1.4px; text-transform: uppercase;
+  font-weight: 600; color: var(--stone); margin: 0 0 6px;
+}
+.bubble p { margin: 0; }
+
+/* Legal pages */
+.doc { padding: 44px 0 24px; }
+.doc h1 { font-size: 34px; margin: 0 0 18px; }
+.doc h2 { font-size: 20px; margin: 30px 0 8px; }
+.doc p, .doc li { max-width: 660px; }
+.doc em { color: var(--stone); }
+
+@media (max-width: 640px) {
+  .wordmark { font-size: 44px; letter-spacing: 5px; }
+  .hero h1 { font-size: 22px; }
+  .hero { padding-top: 48px; }
+  .hero.mark { padding: 0; }
+  .bubble.you { margin-left: 0; }
+  .beta { flex-direction: column; }
+}

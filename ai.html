@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Innernet AI — one subscription, everything wired</title>
+<meta name="description" content="Innernet AI: clean, cited, tagged highlights for every PDF, and a tutor that researches each passage and talks it through with you. In the beta now — request to join.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <section class="hero">
+    <p class="chip">coming soon — join the first users</p>
+    <h1>The tutor at the desk.</h1>
+    <p class="lede">Turn Innernet AI on and everything works: your PDFs come in cleaned, cited and tagged, and every passage you highlight can be talked through with a tutor that has done its reading first.</p>
+  </section>
+
+  <section class="points">
+    <div><h3>Clean, cited highlights</h3><p>Text repair, tags, citations and page numbers for every PDF you add. The engine never formats from thin air — it works out the source's details and the app builds each note in your chosen style.</p></div>
+    <div><h3>Chat about this</h3><p>A tutor that researches each highlight — the text around it, the source's opening pages, real background from the web — then talks it through with you, toward your own title and your own notes.</p></div>
+    <div><h3>In the connections, never instead of you</h3><p>On an insight's board the tutor never suggests a connection. It asks the questions, a turn at a time, and your own words land as your comments.</p></div>
+    <div><h3>Unlimited, with no keys</h3><p>No servers, no API keys, no models to set up. Sign in inside the app and it all works; cancel any time.</p></div>
+  </section>
+
+  <figure class="screen portrait">
+    <img src="images/connections-chat.png" alt="Chat about this on an insight: the tutor has read the board, names each card it sees, and answers the reader's question with a question back.">
+    <figcaption>Chat about this on an insight. The tutor sees the board — the cards, the lines, the comments — and asks; you make the connections.</figcaption>
+  </figure>
+
+  <section class="walk" style="margin-top:56px;">
+    <h2>How a conversation goes</h2>
+    <p>You send what's on the card. The tutor opens on what it has read, keeps to the passage, writes in plain words, and asks before it strays — whatever it brings in from outside the highlight, it gives context for first. When a conversation stalls, a senior tutor reads it over and sets the next few turns a brief. You keep writing the title and the notes; the tutor is there to get you to them.</p>
+  </section>
+
+  <div class="bubble" style="margin-top:28px;">
+    <p class="who">Tutor</p>
+    <p>Then start from the middle card: memory, attention, expectation. Which one does the clock keep, in your own words — and what are the other two left needing?</p>
+  </div>
+
+  <hr class="rule">
+
+  <section class="walk" style="margin-top:28px;">
+    <h2>Join the beta</h2>
+    <p class="quiet">Innernet AI isn't on sale yet. While the app is in beta, everything in it is open — leave your email and you'll be in when it is.</p>
+  </section>
+
+  <form class="beta" onsubmit="location.href = 'mailto:support@theinnernet.co?subject=' + encodeURIComponent('Beta request') + '&body=' + encodeURIComponent(this.email.value); return false;">
+    <input type="email" name="email" required placeholder="your email address" autocomplete="email">
+    <button type="submit">Send request</button>
+  </form>
+
+  <hr class="rule">
+
+  <section class="walk" style="margin-top:28px;">
+    <h2>Your reading stays yours</h2>
+    <p>Your PDFs, highlights and notes are read on your machine, and the tutor's web lookups run there too. What passes through our relay is only what the feature needs — the passage in, the reply out — and your messages are not used to train models. If you'd rather run nothing through us at all, Configure AI manually takes your own Ollama, OpenAI-compatible or Anthropic models, no subscription needed.</p>
+    <p class="quiet">The whole picture is in the <a href="privacy.html">privacy notice</a>.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section class="footnotes">
+    <p>Innernet AI is part of the app, not a separate product.</p>
+    <p>Available for Linux today. Windows and macOS builds are planned.</p>
+  </section>
+</main>
+
+<footer>
+  <p>INNER NETWORKS · Ancaster, Ontario, Canada — registered in Ontario as a sole proprietorship.</p>
+  <nav><a href="./">The App</a><a href="terms.html">Terms of service</a><a href="privacy.html">Privacy notice</a><a href="refund.html">Refund policy</a><a href="mailto:support@theinnernet.co">Contact</a></nav>
+</footer>
+</body>
+</html>
