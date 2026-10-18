@@ -7,6 +7,7 @@
 <meta name="description" content="Innernet is a reader for the PDFs you keep coming back to: highlights become notes with citations, notes gather on a field, insights draw the connections.">
 <link rel="stylesheet" href="style.css">
 <script src="theme.js"></script>
+<script src="downloads.js" defer></script>
 </head>
 <body>
 <main>
@@ -30,10 +31,24 @@
 
   <hr class="rule">
 
-  <section class="walk" style="margin-top:28px;">
-    <h2>From Quote to Note</h2>
-    <p>Each highlight is given dedicated space and time, cited from its source, tagged, and automatically organized for easy reference in a week, a month, a year — who's to say?</p>
-  </section>
+  <h2 class="process-head">From Quote to Note</h2>
+
+  <ol class="process">
+    <li>
+      <h3>Highlight</h3>
+      <p>Come across something noteworthy: “I should remember this.”</p>
+    </li>
+    <li>
+      <h3>Import</h3>
+      <p>Bring it into <em>your</em> web of noteworthy, inspiriting ideas.</p>
+    </li>
+    <li>
+      <h3>Comment</h3>
+      <p>Consider its significance and note it for future reference.</p>
+    </li>
+  </ol>
+
+  <p class="process-lede">Each highlight is given dedicated space and time, cited from its source, tagged, and automatically organized for easy reference in a week, a month, a year — who's to say?</p>
 
   <figure class="screen">
     <img src="images/minima/editing-a-card.webp" data-shot="editing-a-card" alt="A document's cards being edited: titles written as one-sentence summaries, notes stating plainly what the author is saying, the quotation beneath with its Turabian citation and tags.">
@@ -41,12 +56,12 @@
 
   <section class="walk right">
     <h2>Never lose track of a source</h2>
-    <p class="quiet">Everything is cited, citation formats are interchangeable and easily rewritten, and several styles are available automatically: Turabian, Chicago, MLA, APA and more.</p>
+    <p class="quiet">Everything is cited and the source of inspiration is never lost. Citation formats are interchangeable and automatically rewritten, and several popular academic styles are available: Turabian, Chicago, MLA, APA and more.</p>
   </section>
 
   <section class="walk" style="margin-top:48px;">
     <h2>Connect Ideas and Create Insights</h2>
-    <p>Highlights are gathered, connections are drawn, and the chain of reasoning is clearly visualized.</p>
+    <p>Gather each highlight from a range of sources into one space and draw connections. With each connection, a chain of reasoning emerges with precision and clarity. We call it an Insight.</p>
   </section>
 
   <figure class="screen">
@@ -59,12 +74,15 @@
 
   <hr class="rule">
 
-  <section class="beta-ask">
-    <h2>Request to join the beta</h2>
-    <form class="beta" onsubmit="location.href = 'mailto:support@theinnernet.co?subject=' + encodeURIComponent('Beta request') + '&body=' + encodeURIComponent(this.email.value); return false;">
-      <input type="email" name="email" required placeholder="your email address" autocomplete="email">
-      <button type="submit">Send request</button>
-    </form>
+  <section class="get" id="download">
+    <h2>Get Innernet</h2>
+    <p class="quiet">Free for 30 days: the whole app, one source at a time. Then <a href="pricing.html">$20 once, for life</a> — $10 for scholars.</p>
+    <div class="downloads">
+      <!-- The builds (downloads.js keeps their links in one place). -->
+      <a class="download" data-platform="linux" href="#">Download for Linux<span>AppImage · 64-bit</span></a>
+      <a class="download soon" data-platform="windows" aria-disabled="true">Windows<span>coming in the next few days</span></a>
+      <a class="download soon" data-platform="macos" aria-disabled="true">macOS<span>coming in the next few days</span></a>
+    </div>
   </section>
 </main>
 
