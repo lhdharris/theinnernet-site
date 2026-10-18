@@ -106,7 +106,7 @@ main { max-width: 880px; margin: 0 auto; padding: 0 24px; }
 .tagline {
   font-size: 19px; color: var(--stone); max-width: 560px; margin: 0 auto;
 }
-.home-card { padding-bottom: 56px; }
+.home-card { padding-bottom: 36px; }
 .chip {
   display: inline-block; border: 1px solid var(--stone); color: var(--stone);
   border-radius: var(--radius); padding: 4px 12px; font-size: 12px;
@@ -240,16 +240,17 @@ figure.screen figcaption {
    track outlined like the app's with a sliding indicator; clicking a
    segment, or dragging across them, redraws the page (and its pictures)
    in that theme. */
-/* The theme switch holds the page behind it: pinned to the viewport (the
-   app's Note Field, seen steady) while everything after — From Quote to
-   Note on — slides up over it as one card (.sheet), as a card joins the
-   field in the app. */
-.themes {
-  position: sticky; top: 0; z-index: 0;
-  height: 100vh; display: flex; flex-direction: column;
-  justify-content: center;
-  text-align: center; padding: 8px 24px 0;
+/* The display — the Note Field's picture, its tagline and the theme
+   switch just under it, so switching shows the field change — holds the
+   page behind it: pinned once its foot reaches the window's (theme.js
+   measures it, --display-h; unmeasured, it pins at the top) while
+   everything after — From Quote to Note on — slides up over it as one
+   card (.sheet), as a card joins the field in the app. */
+.display {
+  position: sticky; z-index: 0;
+  top: calc(100vh - var(--display-h, 100vh));
 }
+.themes { text-align: center; padding: 0 0 72px; }
 .themes h2 { font-size: 26px; margin: 0 0 22px; }
 /* The rest of the page, riding over it: opaque and the window's full
    width (its content kept to the column), its top the card's rounded

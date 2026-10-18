@@ -21,7 +21,7 @@
 
   // The pictures' version: bumped (with the pages' ?v= on style.css and
   // theme.js) whenever they change, as the CDN and browsers keep the old.
-  var VERSION = '20261018';
+  var VERSION = '20261018b';
 
   function shot(img, theme) {
     return 'images/' + theme.toLowerCase() + '/' + img.getAttribute('data-shot') + '.webp?v=' + VERSION;
@@ -151,6 +151,16 @@
   document.addEventListener('DOMContentLoaded', function () {
     var sw = document.querySelector('.theme-switch');
     if (sw) build(sw);
+    // The home page's display pins at its own height (style.css's .display).
+    var display = document.querySelector('.display');
+    if (display) {
+      var measure = function () {
+        display.style.setProperty('--display-h', display.offsetHeight + 'px');
+      };
+      measure();
+      if (window.ResizeObserver) new ResizeObserver(measure).observe(display);
+      else window.addEventListener('resize', measure);
+    }
     // Opened in a remembered theme: its pictures straight away.
     Array.prototype.forEach.call(document.querySelectorAll('img[data-shot]'), function (img) {
       img.src = shot(img, current);
