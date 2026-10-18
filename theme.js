@@ -19,8 +19,12 @@
   var current = saved();
   root.setAttribute('data-theme', current.toLowerCase());
 
+  // The pictures' version: bumped (with the pages' ?v= on style.css and
+  // theme.js) whenever they change, as the CDN and browsers keep the old.
+  var VERSION = '20261018';
+
   function shot(img, theme) {
-    return 'images/' + theme.toLowerCase() + '/' + img.getAttribute('data-shot') + '.webp';
+    return 'images/' + theme.toLowerCase() + '/' + img.getAttribute('data-shot') + '.webp?v=' + VERSION;
   }
 
   // Each screenshot: the theme's picture fades in over the one showing.
