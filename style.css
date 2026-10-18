@@ -27,6 +27,10 @@
   --deep: color-mix(in srgb, var(--stone) 16%, var(--paper));
   --radius: 8px;
 }
+[data-theme="stick"] {
+  --paper: #FFFFFF; --stone: rgba(54, 54, 54, 0.75); --ink: #363636; --line: rgba(0, 0, 0, 0.3);
+  --page: #FAF9F6; --selected: #AD613E; --on-selected: #FFFFFF; --accent: #AD613E; --on-accent: #FFFFFF;
+}
 [data-theme="dew"] {
   --paper: #FCFEFF; --stone: #5F6C78; --ink: #3F4952; --line: #B7C6D4; --page: #F1F8FD;
   --selected: #B7DCFD; --on-selected: #3F4952; --accent: #95CAF8; --on-accent: #3F4952;
@@ -59,6 +63,7 @@ figure.screen img, .rule, .beta input, .beta button, .theme-switch, .theme-switc
 
 body {
   margin: 0;
+  overflow-x: clip;   /* the full-width sheet's 100vw counts the scroll bar */
   color: var(--ink);
   background: var(--page);
   font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
@@ -235,8 +240,29 @@ figure.screen figcaption {
    track outlined like the app's with a sliding indicator; clicking a
    segment, or dragging across them, redraws the page (and its pictures)
    in that theme. */
-.themes { text-align: center; padding: 8px 0 8px; }
+/* The theme switch holds the page behind it: pinned to the viewport (the
+   app's Note Field, seen steady) while everything after — From Quote to
+   Note on — slides up over it as one card (.sheet), as a card joins the
+   field in the app. */
+.themes {
+  position: sticky; top: 0; z-index: 0;
+  height: 100vh; display: flex; flex-direction: column;
+  justify-content: center;
+  text-align: center; padding: 8px 24px 0;
+}
 .themes h2 { font-size: 26px; margin: 0 0 22px; }
+/* The rest of the page, riding over it: opaque and the window's full
+   width (its content kept to the column), its top the card's rounded
+   corners and the app's hairline, lifting off with a shadow. */
+.sheet {
+  position: relative; z-index: 1;
+  margin: 0 calc(50% - 50vw);
+  padding: 0 calc(50vw - 50%);
+  background: var(--page);
+  border-top: 1px solid var(--line);
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -12px 24px rgba(0, 0, 0, .08);
+}
 .theme-switch {
   display: inline-flex; position: relative; padding: 2px;
   border: 1px solid var(--line); border-radius: 6px;
@@ -319,8 +345,10 @@ footer nav a:hover { color: var(--ink); }
   .hero.mark { padding: 0; }
   .bubble.you { margin-left: 0; }
   .beta { flex-direction: column; }
-  .theme-switch { display: flex; }
-  .theme-switch button, .theme-switch .more { flex: 1; width: auto; font-size: 12px; }
+  /* Seven themes across a phone: "and more…" goes, and they share it. */
+  .theme-switch { display: flex; --count: var(--themes) !important; }
+  .theme-switch button { flex: 1; width: auto; font-size: 11px; padding: 0 1px; }
+  .theme-switch .more { display: none; }
   .process { grid-template-columns: 1fr; gap: 36px; margin: 40px 0; }
   .process li:not(:first-child)::before {
     content: '↓'; top: -31px; left: 50%; width: auto;

@@ -4,7 +4,7 @@
    on the home page it also builds the theme switch, and swaps each
    screenshot (an <img data-shot>) for the same picture in the theme. */
 (function () {
-  var THEMES = ['Minima', 'Dew', 'Blush', 'Mint', 'Lilac', 'Clara'];
+  var THEMES = ['Minima', 'Stick', 'Dew', 'Blush', 'Mint', 'Lilac', 'Clara'];
   var root = document.documentElement;
 
   function saved() {
@@ -86,8 +86,10 @@
   // click picks one, a drag across them picks each one passed over.
   function build(sw) {
     sw.setAttribute('role', 'radiogroup');
-    // (Every segment the same width, "and more…" too.)
+    // (Every segment the same width, "and more…" too; on a phone it's
+    // hidden, and the themes share the width: style.css's --count there.)
     sw.style.setProperty('--count', THEMES.length + 1);
+    sw.style.setProperty('--themes', THEMES.length);
     var indicator = document.createElement('span');
     indicator.className = 'indicator';
     sw.appendChild(indicator);
@@ -104,11 +106,13 @@
     more.textContent = 'and more…';
     more.title = 'Many more themes, made by the community';
     sw.appendChild(more);
-    // The segment under a point: its index (THEMES.length for "and more…").
+    // The segment under a point: its index (THEMES.length for "and more…",
+    // when it shows).
     function at(x) {
       var r = sw.getBoundingClientRect();
-      var i = Math.floor((x - r.left - 2) / ((r.width - 4) / (THEMES.length + 1)));
-      return Math.max(0, Math.min(THEMES.length, i));
+      var n = more.offsetParent ? THEMES.length + 1 : THEMES.length;
+      var i = Math.floor((x - r.left - 2) / ((r.width - 4) / n));
+      return Math.max(0, Math.min(n - 1, i));
     }
     function under(x) { return THEMES[Math.min(THEMES.length - 1, at(x))]; }
     var dragging = false;
