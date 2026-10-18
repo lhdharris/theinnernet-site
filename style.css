@@ -258,6 +258,9 @@ figure.screen figcaption {
 .sheet {
   position: relative; z-index: 1;
   margin: 0 calc(50% - 50vw);
+  /* A pause: this much scrolling with the display held still, before the
+     sheet comes up over it. */
+  margin-top: 40vh;
   padding: 0 calc(50vw - 50%);
   background: var(--page);
   border-top: 1px solid var(--line);

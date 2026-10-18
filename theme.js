@@ -21,7 +21,7 @@
 
   // The pictures' version: bumped (with the pages' ?v= on style.css and
   // theme.js) whenever they change, as the CDN and browsers keep the old.
-  var VERSION = '20261018c';
+  var VERSION = '20261018d';
 
   function shot(img, theme) {
     return 'images/' + theme.toLowerCase() + '/' + img.getAttribute('data-shot') + '.webp?v=' + VERSION;
