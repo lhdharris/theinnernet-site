@@ -250,7 +250,7 @@ figure.screen figcaption {
   position: sticky; z-index: 0;
   top: calc(100vh - var(--display-h, 100vh));
 }
-.themes { text-align: center; padding: 0 0 72px; }
+.themes { text-align: center; padding: 0 0 200px; }
 .themes h2 { font-size: 26px; margin: 0 0 22px; }
 /* The rest of the page, riding over it: opaque and the window's full
    width (its content kept to the column), its top the card's rounded
