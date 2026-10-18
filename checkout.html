@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Innernet</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+<script src="theme.js"></script>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+</head>
+<body>
+<main>
+  <!-- Paddle's default payment link: the app opens this page with ?_ptxn=…
+       (a transaction innernet-cloud made for the signed-in account), and
+       Paddle.js opens that checkout over it. -->
+  <section class="doc" style="text-align:center;">
+    <h1 id="title">Opening the checkout…</h1>
+    <p class="quiet" id="note">Paddle, our merchant of record, takes the payment and adds any sales tax.</p>
+  </section>
+</main>
+<script>
+  // Which Paddle, and its client-side token (public by design).
+  var PADDLE = { environment: 'sandbox', token: 'test_2c0f29389fe4ec0c87f4d2f97ee' };
+
+  function say(title, note) {
+    document.getElementById('title').textContent = title;
+    document.getElementById('note').textContent = note;
+  }
+  if (!new URLSearchParams(location.search).has('_ptxn')) {
+    say('Purchases start in the app', 'Open Innernet and choose Get a License (or, for Innernet AI, Configure AI in Settings).');
+  } else {
+    if (PADDLE.environment === 'sandbox') Paddle.Environment.set('sandbox');
+    Paddle.Initialize({
+      token: PADDLE.token,
+      eventCallback: function (event) {
+        if (event.name === 'checkout.completed') {
+          say('Thank you', 'You can close this tab and return to Innernet: it notices by itself in a few seconds.');
+        } else if (event.name === 'checkout.closed') {
+          say('Checkout closed', 'Nothing was charged. Return to Innernet to start again whenever you like.');
+        }
+      }
+    });
+  }
+</script>
+</body>
+</html>
