@@ -50,7 +50,8 @@
 
 /* A change of theme glides rather than snaps. */
 body, a, h1, h2, h3, h4, .intro, .wordmark, .tagline, .quiet, footer, footer nav a,
-figure.screen img, .rule, .beta input, .beta button, .theme-switch, .theme-switch button {
+figure.screen img, .rule, .beta input, .beta button, .theme-switch, .theme-switch button,
+.process li, .process h3, .process p, .process li:not(:first-child)::before {
   transition: background-color .35s ease, color .35s ease, border-color .35s ease;
 }
 
@@ -132,6 +133,43 @@ figure.screen figcaption {
 }
 .points h3 { margin: 0 0 8px; font-size: 16.5px; }
 .points p { margin: 0; font-size: 15px; color: var(--stone); }
+
+/* From Quote to Note: a centred heading, then the three steps as cards
+   joined by stone arrows — the app's connecting lines, pointed — then the
+   sentence, centred under the cards. */
+.process-head {
+  text-align: center; font-size: 26px;
+  margin: 64px 0 0;
+}
+.process {
+  list-style: none; margin: 44px 0; padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 46px;
+  max-width: 832px;
+}
+/* Each step a Note Field card (FieldCard), a third again their size: the
+   paper a step up from the page's, one border of a single width (darkened
+   only by hovering, as the card raises), radius 10, a 14 px title and
+   13 px notes on 1.4 — here at that size ×1.3. */
+.process li {
+  position: relative; border: 1px solid var(--line); border-radius: 13px;
+  padding: 16px 18px 18px; background: var(--paper);
+}
+.process li:hover { border-color: var(--ink); }
+.process li:not(:first-child)::before {
+  content: '→'; position: absolute; left: -46px; width: 46px;
+  top: 50%; transform: translateY(-50%);
+  text-align: center; color: var(--stone); font-size: 22px; font-weight: 600;
+}
+.process h3 {
+  margin: 0 0 8px; font-size: 18px; font-weight: 600;
+  text-transform: none; letter-spacing: 0; color: var(--ink);
+}
+.process p { margin: 0; font-size: 17px; line-height: 1.4; color: var(--ink); }
+.process p em { color: var(--ink); }
+.process-lede {
+  text-align: center; color: var(--ink);
+  max-width: 640px; margin: 0 auto;
+}
 
 /* A word section beside or before a figure */
 .walk { max-width: 640px; margin: 0; }
@@ -283,4 +321,9 @@ footer nav a:hover { color: var(--ink); }
   .beta { flex-direction: column; }
   .theme-switch { display: flex; }
   .theme-switch button, .theme-switch .more { flex: 1; width: auto; font-size: 12px; }
+  .process { grid-template-columns: 1fr; gap: 36px; margin: 40px 0; }
+  .process li:not(:first-child)::before {
+    content: '↓'; top: -31px; left: 50%; width: auto;
+    transform: translateX(-50%);
+  }
 }
