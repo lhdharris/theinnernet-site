@@ -23,7 +23,32 @@
       <a class="download soon" data-platform="macos" aria-disabled="true">macOS<span>Apple silicon and Intel</span></a>
       <a class="download soon" data-platform="linux" aria-disabled="true">Linux<span>AppImage · 64-bit</span></a>
     </div>
-    <p class="quiet download-note">The beta's builds aren't signed yet, so your computer may ask twice: on a Mac, open Innernet the first time with right-click → Open; on Windows, choose More info → Run anyway.</p>
+  </section>
+
+  <section class="doc">
+    <h2>Opening the beta</h2>
+    <p>The beta's builds aren't signed yet, so your computer will check with you the first time you open Innernet. After that, it opens like any other app. (Signed builds are on their way.)</p>
+
+    <h3>macOS</h3>
+    <ol>
+      <li>Open the download (Safari may already have unzipped it) and drag <strong>Innernet</strong> into your Applications folder.</li>
+      <li>Double-click Innernet. macOS says it can't verify the app: click <strong>Done</strong>.</li>
+      <li>Open <strong>System Settings → Privacy &amp; Security</strong>, scroll down to Security, and click <strong>Open Anyway</strong> beside Innernet. (The button shows for about an hour after you try to open it.)</li>
+      <li>Enter your password, then click <strong>Open</strong>.</li>
+    </ol>
+
+    <h3>Windows</h3>
+    <ol>
+      <li>Right-click the download and choose <strong>Extract All</strong>. Innernet needs the files beside it, so run it from the extracted folder, not from inside the zip.</li>
+      <li>Double-click <strong>Innernet.exe</strong>. If Windows says it protected your PC, click <strong>More info</strong>, then <strong>Run anyway</strong>.</li>
+      <li>If Windows instead says <strong>Smart App Control</strong> blocked it, there's no way past that for an unsigned app. Please wait for the next beta, which will be signed. We don't suggest turning Smart App Control off.</li>
+    </ol>
+
+    <h3>Linux</h3>
+    <ol>
+      <li>Make the AppImage executable: in your file manager's Properties, allow it to run as a program, or run <code>chmod +x Innernet-x86_64.AppImage</code>.</li>
+      <li>Double-click it to open Innernet.</li>
+    </ol>
   </section>
 </main>
 <footer>
