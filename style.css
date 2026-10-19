@@ -154,7 +154,7 @@ figure.screen figcaption {
   display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 46px;
   max-width: 832px;
 }
-/* Each step a Note Field card (FieldCard), a third again their size: the
+/* Each step drawn as a card of the app's Note Field, a third again its size: the
    paper a step up from the page's, one border of a single width (darkened
    only by hovering, as the card raises), radius 10, a 14 px title and
    13 px notes on 1.4 — here at that size ×1.3. */
@@ -239,7 +239,7 @@ figure.screen figcaption {
 }
 .beta button:hover { background: color-mix(in srgb, var(--accent) 85%, var(--paper)); }
 
-/* The themes: the app's view switch (SlideToggle) as a theme switch, a
+/* The themes: the app's view switch as a theme switch, a
    track outlined like the app's with a sliding indicator; clicking a
    segment, or dragging across them, redraws the page (and its pictures)
    in that theme. */
