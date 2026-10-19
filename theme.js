@@ -1,8 +1,10 @@
 /* The app's themes, on the site: <html data-theme> picks one (Minima, the
    default, needs none), remembered for the visitor's next page or visit.
    Loaded in <head>, so a page opens in the remembered theme straight away;
-   on the home page it also builds the theme switch, and swaps each
-   screenshot (an <img data-shot>) for the same picture in the theme. */
+   on the home page it also builds the theme switch, swaps each
+   screenshot (an <img data-shot>) for the same picture in the theme, and,
+   from 4 s after it opens, steps through the themes by itself (every 4 s)
+   until the visitor touches the switch. */
 (function () {
   var THEMES = ['Minima', 'Stick', 'Dew', 'Blush', 'Mint', 'Lilac', 'Clara'];
   var root = document.documentElement;
@@ -67,11 +69,14 @@
     });
   }
 
-  function use(theme) {
+  // [shown]: stepped to by the tour, not chosen, so not remembered.
+  function use(theme, shown) {
     if (theme === current) return;
     current = theme;
     root.setAttribute('data-theme', theme.toLowerCase());
-    try { localStorage.setItem('innernet-theme', theme); } catch (e) {}
+    if (!shown) {
+      try { localStorage.setItem('innernet-theme', theme); } catch (e) {}
+    }
     swapShots(theme);
     var sw = document.querySelector('.theme-switch');
     if (sw) mark(sw);
@@ -120,6 +125,23 @@
     }
     function under(x) { return THEMES[Math.min(THEMES.length - 1, at(x))]; }
     var dragging = false;
+    // The tour: from 4 s after the page opens, the next theme every 4 s
+    // (waiting while the tab's hidden); the switch touched, it stops for
+    // good. Not for visitors who'd rather less moved.
+    var STEP = 4000;
+    var touring = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
+    var tour = null;
+    function next() {
+      if (!touring || document.hidden) return;
+      use(THEMES[(THEMES.indexOf(current) + 1) % THEMES.length], true);
+    }
+    function endTour() {
+      touring = false;
+      clearInterval(tour);
+    }
+    if (touring) tour = setInterval(next, STEP);
+    sw.addEventListener('pointerdown', endTour, true);
+    sw.addEventListener('keydown', endTour, true);
     sw.addEventListener('pointerdown', function (e) {
       // ("and more…" takes no press; a drag onto it stays on the last theme.)
       if (at(e.clientX) >= THEMES.length) return;
