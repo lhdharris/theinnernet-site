@@ -12,7 +12,8 @@
 <body>
 <main>
   <!-- Paddle's default payment link: the app opens this page with ?_ptxn=…
-       (a transaction innernet-cloud made for the signed-in account), and
+       (a transaction innernet-cloud made: a license, with no account, or
+       Innernet AI for the signed-in account), and
        Paddle.js opens that checkout over it. -->
   <section class="doc" style="text-align:center;">
     <h1 id="title">Opening the checkout…</h1>
@@ -35,7 +36,7 @@
       token: PADDLE.token,
       eventCallback: function (event) {
         if (event.name === 'checkout.completed') {
-          say('Thank you', 'You can close this tab and return to Innernet: it notices by itself in a few seconds.');
+          say('Thank you', 'You can close this tab and return to Innernet: it notices by itself in a few seconds. A license code is also emailed to you; keep it for your other computers.');
         } else if (event.name === 'checkout.closed') {
           say('Checkout closed', 'Nothing was charged. Return to Innernet to start again whenever you like.');
         }
