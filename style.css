@@ -23,13 +23,16 @@
   --on-selected: var(--paper);
   --accent: var(--ink);          /* filled buttons */
   --on-accent: var(--paper);
+  --fill-line: transparent;      /* an outline round filled things, where they're as pale as the page (Stick) */
+  --accent-border: var(--accent);
   --wash: color-mix(in srgb, var(--stone) 8%, var(--paper));
   --deep: color-mix(in srgb, var(--stone) 16%, var(--paper));
   --radius: 8px;
 }
 [data-theme="stick"] {
   --paper: #FFFFFF; --stone: rgba(54, 54, 54, 0.75); --ink: #363636; --line: rgba(0, 0, 0, 0.3);
-  --page: #FAF9F6; --selected: #AD613E; --on-selected: #FFFFFF; --accent: #AD613E; --on-accent: #FFFFFF;
+  --page: #FAF9F6; --selected: #FFF6BF; --on-selected: #363636; --accent: #FFF6BF; --on-accent: #363636;
+  --fill-line: rgba(0, 0, 0, 0.3); --accent-border: var(--fill-line);
 }
 [data-theme="dew"] {
   --paper: #FCFEFF; --stone: #5F6C78; --ink: #3F4952; --line: #B7C6D4; --page: #F1F8FD;
@@ -232,7 +235,7 @@ figure.screen figcaption {
 .beta button {
   padding: 10px 18px; font: inherit; font-weight: 600; cursor: pointer;
   background: var(--accent); color: var(--on-accent);
-  border: 1px solid var(--accent); border-radius: var(--radius);
+  border: 1px solid var(--accent-border); border-radius: var(--radius);
 }
 .beta button:hover { background: color-mix(in srgb, var(--accent) 85%, var(--paper)); }
 
@@ -277,6 +280,7 @@ figure.screen figcaption {
   position: absolute; top: 2px; bottom: 2px; left: 2px;
   width: calc((100% - 4px) / var(--count)); border-radius: 4px;
   background: var(--selected);
+  box-shadow: inset 0 0 0 1px var(--fill-line);
   transform: translateX(calc(var(--at) * 100%));
   transition: transform .2s ease-out, background-color .35s ease;
 }
