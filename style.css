@@ -267,7 +267,7 @@ figure.screen figcaption {
   padding: 0 calc(50vw - 50%);
   /* An empty band at its top, so the card comes well up before any of
      its writing does. */
-  padding-top: 30vh;
+  padding-top: calc(15vh - 32px);   /* (with From Quote to Note's 64px: 15vh + 32px in all) */
   background: var(--page);
   border-top: 1px solid var(--line);
   border-radius: 16px 16px 0 0;
