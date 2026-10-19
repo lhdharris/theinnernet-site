@@ -222,8 +222,27 @@ figure.screen figcaption {
 .tiny { font-size: 13px; color: var(--stone); margin-top: 18px; }
 
 /* Beta request: an email box and a filled send button, as the app's controls */
+/* Downloads (its own page, from the footer): one per platform, those
+   still to come quiet. */
+.get { text-align: center; margin: 24px 0 56px; }
+.get .quiet { max-width: 560px; margin: 0 auto 22px; }
+.download-note { font-size: 13.5px; margin: 22px auto 0 !important; }
+.downloads { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.download {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  min-width: 190px; padding: 11px 18px; border-radius: var(--radius);
+  font-weight: 600; text-decoration: none;
+  background: var(--accent); color: var(--on-accent); border: 1px solid var(--accent-border);
+  transition: background-color .35s ease, color .35s ease, border-color .35s ease;
+}
+.download span { font-size: 12.5px; font-weight: 400; opacity: .85; }
+.download:hover { color: var(--on-accent); background: color-mix(in srgb, var(--accent) 85%, var(--paper)); }
+.download.soon, .download.soon:hover {
+  background: none; color: var(--stone); border-color: var(--line); cursor: default;
+}
 .beta-ask { text-align: center; margin: 48px 0 56px; }
 .beta-ask h2 { font-size: 26px; margin: 0 0 22px; }
+.beta-free { margin: -10px auto 22px; }
 .beta { display: flex; gap: 12px; max-width: 520px; margin: 0 auto; }
 .beta input {
   flex: 1; padding: 10px 14px; font: inherit; color: var(--ink);
