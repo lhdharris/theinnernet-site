@@ -23,6 +23,7 @@
       <a class="download soon" data-platform="macos" aria-disabled="true">macOS<span>Apple silicon and Intel</span></a>
       <a class="download soon" data-platform="linux" aria-disabled="true">Linux<span>AppImage · 64-bit</span></a>
     </div>
+    <p class="quiet also">Also for Linux: <a class="soon" data-platform="deb" aria-disabled="true">.deb</a> (Debian, Ubuntu, Mint) · <a class="soon" data-platform="rpm" aria-disabled="true">.rpm</a> (Fedora, openSUSE)</p>
   </section>
 
   <section class="doc">
@@ -46,8 +47,14 @@
 
     <h3>Linux</h3>
     <ol>
-      <li>Make the AppImage executable: in your file manager's Properties, allow it to run as a program, or run <code>chmod +x Innernet-x86_64.AppImage</code>.</li>
-      <li>Double-click it to open Innernet.</li>
+      <li>The AppImage runs anywhere: make it executable (in your file manager's Properties, allow it to run as a program, or <code>chmod +x Innernet-x86_64.AppImage</code>), then double-click it.</li>
+      <li>Or install the package for your system, which puts Innernet in your app menu. In the folder you downloaded it to:
+        <ul class="commands">
+          <li>Debian, Ubuntu, Mint: <code>sudo apt install ./Innernet-amd64.deb</code></li>
+          <li>Fedora: <code>sudo dnf install ./Innernet-x86_64.rpm</code></li>
+          <li>openSUSE: <code>sudo zypper install ./Innernet-x86_64.rpm</code></li>
+        </ul>
+      </li>
     </ol>
   </section>
 </main>
