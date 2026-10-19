@@ -3,10 +3,10 @@
    Loaded in <head>, so a page opens in the remembered theme straight away;
    on the home page it also builds the theme switch, swaps each
    screenshot (an <img data-shot>) for the same picture in the theme, and,
-   from 4 s after it opens, steps through the themes by itself (every 4 s)
-   until the visitor touches the switch. */
+   straight away from it opening, steps through the themes by itself (every
+   4 s) until the visitor touches the switch. */
 (function () {
-  var THEMES = ['Minima', 'Stick', 'Dew', 'Blush', 'Mint', 'Lilac', 'Clara'];
+  var THEMES = ['Minima', 'Stick', 'Dew', 'Blush', 'Clara'];
   var root = document.documentElement;
 
   function saved() {
@@ -125,7 +125,7 @@
     }
     function under(x) { return THEMES[Math.min(THEMES.length - 1, at(x))]; }
     var dragging = false;
-    // The tour: from 4 s after the page opens, the next theme every 4 s
+    // The tour: the next theme straight away, then one every 4 s
     // (waiting while the tab's hidden); the switch touched, it stops for
     // good. Not for visitors who'd rather less moved.
     var STEP = 4000;
@@ -139,7 +139,10 @@
       touring = false;
       clearInterval(tour);
     }
-    if (touring) tour = setInterval(next, STEP);
+    if (touring) {
+      next();
+      tour = setInterval(next, STEP);
+    }
     sw.addEventListener('pointerdown', endTour, true);
     sw.addEventListener('keydown', endTour, true);
     sw.addEventListener('pointerdown', function (e) {
@@ -170,9 +173,31 @@
     mark(sw);
   }
 
+  // The scroll cue (the home page): from 2 s after it opens, a chevron at
+  // the window's foot encourages the visitor down into the sheet; gone
+  // while they've scrolled away from the top and, once pressed, for good.
+  // Pressed, it takes them to the sheet at once.
+  function cue() {
+    var b = document.querySelector('.scroll-cue');
+    if (!b) return;
+    var shown = false, pressed = false;
+    function top() { return (window.scrollY || document.documentElement.scrollTop || 0) < 80; }
+    function update() { b.classList.toggle('show', shown && !pressed && top()); }
+    window.addEventListener('scroll', update, { passive: true });
+    b.addEventListener('click', function () {
+      pressed = true; update();
+      var quiet = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var sheet = document.querySelector('.sheet');
+      if (sheet) sheet.scrollIntoView({ behavior: quiet ? 'auto' : 'smooth' });
+      else window.scrollTo({ top: window.innerHeight, behavior: quiet ? 'auto' : 'smooth' });
+    });
+    setTimeout(function () { shown = true; update(); }, 2000);
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     var sw = document.querySelector('.theme-switch');
     if (sw) build(sw);
+    cue();
     // The home page's display pins at its own height (style.css's .display).
     var display = document.querySelector('.display');
     if (display) {
