@@ -273,13 +273,12 @@ figure.screen figcaption {
   border-radius: 16px 16px 0 0;
   box-shadow: 0 -12px 24px rgba(0, 0, 0, .08);
 }
-/* The scroll cue: a chevron at the window's foot (only on the home page),
-   faded in 2 s after the page opens to encourage the visitor down into
-   the sheet above; gone while they've scrolled (back with them below it),
-   and once pressed for good. */
+/* The scroll cue: a chevron under the wordmark (only on the home page),
+   faded in 2 s after the page opens to encourage the visitor on and down
+   into the sheet above; gone once pressed (it takes them there), and
+   scrolled out of sight with the hero otherwise. */
 .scroll-cue {
-  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
-  z-index: 2; margin: 0; padding: 8px; line-height: 0;
+  display: block; margin: 56px 0 0; padding: 8px; line-height: 0;
   color: var(--stone); background: none; border: 0; cursor: pointer;
   opacity: 0; visibility: hidden; pointer-events: none;
   transition: opacity .5s ease, visibility 0s linear .5s, color .15s ease;

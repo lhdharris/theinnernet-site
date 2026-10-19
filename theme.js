@@ -173,17 +173,15 @@
     mark(sw);
   }
 
-  // The scroll cue (the home page): from 2 s after it opens, a chevron at
-  // the window's foot encourages the visitor down into the sheet; gone
-  // while they've scrolled away from the top and, once pressed, for good.
-  // Pressed, it takes them to the sheet at once.
+  // The scroll cue (the home page): from 2 s after it opens, the chevron
+  // under the wordmark encourages the visitor on and down into the sheet;
+  // pressed (it takes them there, smooth unless they'd rather no motion),
+  // it goes for good, and scrolls off with the hero otherwise.
   function cue() {
     var b = document.querySelector('.scroll-cue');
     if (!b) return;
-    var shown = false, pressed = false;
-    function top() { return (window.scrollY || document.documentElement.scrollTop || 0) < 80; }
-    function update() { b.classList.toggle('show', shown && !pressed && top()); }
-    window.addEventListener('scroll', update, { passive: true });
+    var pressed = false;
+    function update() { b.classList.toggle('show', !pressed); }
     b.addEventListener('click', function () {
       pressed = true; update();
       var quiet = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -191,7 +189,7 @@
       if (sheet) sheet.scrollIntoView({ behavior: quiet ? 'auto' : 'smooth' });
       else window.scrollTo({ top: window.innerHeight, behavior: quiet ? 'auto' : 'smooth' });
     });
-    setTimeout(function () { shown = true; update(); }, 2000);
+    setTimeout(update, 2000);
   }
 
   document.addEventListener('DOMContentLoaded', function () {
