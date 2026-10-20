@@ -245,6 +245,9 @@ figure.screen figcaption {
 .beta-ask { text-align: center; margin: 48px 0 56px; }
 .beta-ask h2 { font-size: 26px; margin: 0 0 22px; }
 .beta-free { margin: -10px auto 22px; }
+/* The field only bots fill in: off screen, never seen. */
+.beta-trap { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; }
+.beta-note { margin: 14px auto 0; min-height: 1.4em; }
 .beta { display: flex; gap: 12px; max-width: 520px; margin: 0 auto; }
 .beta input {
   flex: 1; padding: 10px 14px; font: inherit; color: var(--ink);

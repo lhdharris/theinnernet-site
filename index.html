@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Innernet — a home for your highlights</title>
 <meta name="description" content="Innernet is a reader for the PDFs you keep coming back to: highlights become notes with citations, notes gather on a field, insights draw the connections.">
-<link rel="stylesheet" href="style.css?v=20261019f">
-<script src="theme.js?v=20261019f"></script>
+<link rel="stylesheet" href="style.css?v=20261019g">
+<script src="theme.js?v=20261019g"></script>
+<script src="beta.js?v=20261019g" defer></script>
 </head>
 <body>
 <main>
@@ -88,8 +89,9 @@
   <section class="beta-ask" id="beta">
     <h2>Request to join the beta</h2>
     <p class="quiet beta-free">Innernet is in beta. Testers we approve get a license, free.</p>
-    <form class="beta" onsubmit="location.href = 'mailto:support@theinnernet.co?subject=' + encodeURIComponent('Beta request') + '&body=' + encodeURIComponent(this.email.value); return false;">
+    <form class="beta">
       <input type="email" name="email" required placeholder="your email address" autocomplete="email">
+      <input type="text" name="website" class="beta-trap" tabindex="-1" autocomplete="off" aria-hidden="true">
       <button type="submit">Send request</button>
     </form>
   </section>
